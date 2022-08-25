@@ -12,4 +12,10 @@
  *
  *= require_tree .
  *= require_self
+ *= require bulma/bulma.css
  */
+
+
+ #error_explanation ul li{
+    color: red;
+ }
