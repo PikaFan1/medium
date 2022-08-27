@@ -1,0 +1,24 @@
+<%= form_for(story) do |form| %>
+  <div class="field">
+    <div class="control">
+      <%= form.label :title, '標題' %>
+      <%= form.text_field :title, class: 'input is-primary' %>
+    </div>
+  </div>
+
+  <div class="field">
+    <div class="control">
+      <%= form.label :content, '內容' %>
+      <%= form.text_area :content, rows: 10, class: 'textarea is-primary' %>
+    </div>
+  </div>
+
+  <div class="actions">
+    <%= form.submit "儲存草稿", name: "save_as_draft", class: "button" %>
+    <%- if story.status == 'draft' %>
+      <%= form.submit "發布文章", name: "publish", class: "button is-primary" %>
+    <% else %>
+      <%= form.submit "更新文章", name: "publish", class: "button is-primary" %>
+    <% end %>
+  </div>
+<% end %>

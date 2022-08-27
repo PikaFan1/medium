@@ -1,0 +1,19 @@
+<h1>當前文章</h1>
+
+
+<div class="content">
+  <h2 class="title"><%= @story.title %>
+    <div>
+      <%= link_to '返回我的文章列表', stories_path, class: 'button is-text is-small' %>
+      <%= link_to '編輯', edit_story_path(params[:id]), class: 'button is-text is-small' %>
+      <%= link_to '刪除', story_path(params[:id]), method: 'delete', class: 'button is-text is-small', data:{confirm: '確認刪除？ '} %>
+    </div>
+  </h2> 
+
+  <hr>
+  
+  <p><%= @story.content %></p>
+  <hr>
+  <p>最後更新時間：<%= time_ago_in_words(@story.updated_at) %>前</p>
+    
+</div>
