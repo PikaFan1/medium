@@ -13,10 +13,10 @@ class StoriesController < ApplicationController
 
   def create
     @story = current_user.stories.new(story_params)
-    @story.publish! if params[:publish]
 
     if @story.save
       if params[:publish]
+        @story.publish!
         redirect_to stories_path, notice: '發布成功'
       else
         redirect_to edit_story_path(@story), notice: '儲存成功'
@@ -34,9 +34,9 @@ class StoriesController < ApplicationController
 
   def update
     oddstory = @story
-    @pending_story = oddstory.pending_story.new(story_params)
+    @pending_story = oddstory.build_pending_story(story_params)
 
-    if @pending_story.update(story_params)
+    if @pending_story.save
       if params[:publish]
         oddstory.update(story_params)
         oddstory.publish! if oddstory.may_publish?
@@ -48,7 +48,7 @@ class StoriesController < ApplicationController
           redirect_to edit_story_path(oddstory), notice: '儲存成功'
           @pending_story.destroy
         else
-          redirect_to edit_story_path(@pending_story), notice: '儲存成功'
+          redirect_to edit_pending_story_path(oddstory), notice: '儲存成功'
         end
       end
     else
@@ -70,7 +70,5 @@ class StoriesController < ApplicationController
     params.require(:story).permit(:title, :content)
   end
 
-  def pending_story_params
-    params.require(:pending_story).permit(:title, :content)
-  end
+  
 end

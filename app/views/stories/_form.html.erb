@@ -15,7 +15,7 @@
 
   <div class="actions">
     <%= form.submit "儲存草稿", name: "save_as_draft", class: "button" %>
-    <%- if story.draft? %>
+    <%- if story.status == 'draft' %>
       <%= form.submit "發布文章", name: "publish", class: "button is-primary" %>
     <% else %>
       <%= form.submit "更新文章", name: "publish", class: "button is-primary" %>

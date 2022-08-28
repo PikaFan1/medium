@@ -6,13 +6,19 @@
       <%= story.title %>
       <%= content_tag :span, '已發佈', class: 'tag is-primary' if story.published? %>
       <%= content_tag :span, '未發佈', class: 'tag' if story.draft? %>
-      <%= content_tag :span, '已發佈，正在編輯', class: 'tag' if story.pending_story == 'pending' %>
+      <%= content_tag :span, '編輯中', class: 'tag' if story.pending_story != nil %>
 
     </h2> 
     <p><%= story.content %></p>
     <p>
         最後更新時間：<%= time_ago_in_words(story.updated_at) %>前
-        <%= link_to '編輯', edit_story_path(story), class: 'button is-text is-small' %>
+
+        <% if story.pending_story != nil %>
+          <%= link_to '編輯', edit_pending_story_path(story), class: 'button is-text is-small' %>
+        <% else %>
+          <%= link_to '編輯', edit_story_path(story), class: 'button is-text is-small' %>
+        <% end %>
+
         <%= link_to '刪除', story_path(story), method: 'delete', class: 'button is-danger is-small', data:{confirm: '確認刪除？ '} %>
     </p>
     <p>創建時間：<%= story.created_at.to_date %></p>

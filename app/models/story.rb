@@ -1,7 +1,7 @@
 class Story < ApplicationRecord
   
   belongs_to :user
-  has_one :pending_story
+  has_one :pending_story, dependent: :destroy
 
   validates :title, :content, presence: true
 
