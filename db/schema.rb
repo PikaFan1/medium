@@ -10,9 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_08_27_061320) do
+ActiveRecord::Schema[7.0].define(version: 2022_08_28_092035) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "pending_stories", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "title"
+    t.text "content"
+    t.string "status", default: "pending"
+    t.bigint "story_id"
+    t.index ["story_id"], name: "index_pending_stories_on_story_id"
+  end
 
   create_table "stories", force: :cascade do |t|
     t.string "title"
@@ -38,5 +48,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_27_061320) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "pending_stories", "stories"
   add_foreign_key "stories", "users"
 end
