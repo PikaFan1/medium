@@ -1,17 +1,21 @@
 class PendingStoriesController < ApplicationController
   before_action :authenticate_user!
-  before_action :find_pending_story, only: [:show, :edit, :update, :destroy]
 
 
   def edit
+    @pending_story = PendingStory.find_by_story_id(params[:id])
+
   end
 
   def update
+    @pending_story = PendingStory.find(params[:id])
+    @story = @pending_story.story
+
     if @pending_story.update(pending_story_params)
       if params[:publish]
-        @story.update(pending_story_params)
-        redirect_to stories_path, notice: '發布成功'
+        @story.update(title: @pending_story.title, content: @pending_story.content)
         @pending_story.destroy
+        redirect_to stories_path, notice: '發布成功'
       else
         redirect_to edit_pending_story_path(@story), notice: '儲存成功'
       end
@@ -27,8 +31,7 @@ class PendingStoriesController < ApplicationController
   
   private
   def find_pending_story
-    @story = current_user.stories.find(params[:id])
-    @pending_story = @story.pending_story
+    @pending_story = PendingStory.find_by_story_id(params[:id])
   end
 
   def pending_story_params
