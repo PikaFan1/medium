@@ -56,7 +56,11 @@ class StoriesController < ApplicationController
   end
 
   def destroy
-    @story.destroy
+    if @story.pending_story != nil
+      @story.pending_story.destroy 
+    else
+      @story.destroy
+    end
     redirect_to stories_path, notice: '刪除成功！'
   end
 

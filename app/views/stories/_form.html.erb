@@ -1,3 +1,15 @@
+<% if story.errors.any? %>
+  <div id="error_explanation">
+    <ul>
+      <% story.errors.full_messages.each do |message| %>
+        <li>*<%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<br>
+
 <%= form_for(story) do |form| %>
   <div class="field">
     <div class="control">

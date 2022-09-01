@@ -1,10 +1,13 @@
 class PendingStoriesController < ApplicationController
   before_action :authenticate_user!
 
+  def show
+    @pending_story = PendingStory.find_by_story_id(params[:id])
+    @story = @pending_story.story
+  end
 
   def edit
     @pending_story = PendingStory.find_by_story_id(params[:id])
-
   end
 
   def update

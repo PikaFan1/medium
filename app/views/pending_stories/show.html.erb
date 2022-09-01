@@ -1,0 +1,24 @@
+<h1>當前草稿</h1>
+
+<div class="content">
+    <div class="buttons">
+      <h2 class="title">
+        <%= @pending_story.title %>
+      </h2> 
+
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="is-hoverable navbar-link"></a>
+        <div class="navbar-dropdown">
+          <%= link_to '編輯草稿', edit_pending_story_path(@story), class: "navbar-item", data:{confirm: '已有正在編輯的草稿，是否繼續編輯？'} %>
+          <%= link_to '以草稿更新文章', publish_story_path(@story), method: 'post', class: "navbar-item" %>
+          <%= link_to '刪除草稿', story_path(@story), method: 'delete', class: "navbar-item", data:{confirm: '確認刪除？'} %>
+        </div>
+      </div>
+    </div>
+
+    <p><%= @pending_story.content %></p>
+
+    <p>
+      最後更新時間：<%= time_ago_in_words(@pending_story.updated_at) %>前
+    </p>
+</div>

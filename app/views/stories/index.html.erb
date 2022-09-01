@@ -6,13 +6,11 @@
     <div class="buttons">
 
       <h2 class="title">
-        <%= story.title %>
+        <%= link_to story.title, story_path(story) %>
         <%= content_tag :span, '已發佈', class: 'tag is-primary' if story.published? %>
         <%= content_tag :span, '未發佈', class: 'tag' if story.draft? %>
-        <%= content_tag :span, '編輯中', class: 'tag' if story.pending_story != nil %>
+        <%= content_tag :span, '草稿編輯中', class: 'tag' if story.pending_story != nil %>
       </h2> 
-
-      
 
       <div class="navbar-item has-dropdown is-hoverable">
         <a class="is-hoverable navbar-link"></a>
@@ -20,15 +18,16 @@
         <div class="navbar-dropdown">
           <div>
             <% if story.pending_story != nil %>
-              <%= link_to '編輯', edit_pending_story_path(story), class: "navbar-item" %>
-              <%= link_to '更新文章', publish_story_path(story), method: 'post', class: "navbar-item" %>
+              <%= link_to '編輯草稿', edit_pending_story_path(story), class: "navbar-item" %>
+              <%= link_to '以草稿更新文章', publish_story_path(story), method: 'post', class: "navbar-item" %>
+              <%= link_to '刪除草稿', story_path(story), method: 'delete', class: "navbar-item", data:{confirm: '確認刪除？'} %>
             <% else %>
-              <%= link_to '編輯', edit_story_path(story), class: "navbar-item" %>
+              <%= link_to '編輯文章', edit_story_path(story), class: "navbar-item" %>
             <% end %>
           </div>
-          <% if story.draft? %>
-            <%= link_to '發布文章', publish_story_path(story), method: 'post', class: "navbar-item" %>
-          <% end %>
+          
+          <%= link_to '發布文章', publish_story_path(story), method: 'post', class: "navbar-item" if story.draft? %>
+
           <div>
             <% if story.published? %>
               <%= link_to '下架文章', unpublish_story_path(story), method: 'post', class: "navbar-item", data:{confirm: '確認下架？'} %>
@@ -42,10 +41,16 @@
 
     <p><%= story.content %></p>
 
-    <div>
-      <p>最後更新時間：<%= time_ago_in_words(story.updated_at) %>前</p>
-      <p>創建時間：<%= story.created_at.to_date %></p>
-    </div>
+    <p>
+      創建時間：<%= story.created_at.to_date %>，
+      最後更新時間：<%= time_ago_in_words(story.updated_at) %>前
+    </p>
+
+    <% if story.pending_story != nil %>
+      <%= link_to story.pending_story.title, pending_story_path(story) %>（草稿）
+      <p><%= story.pending_story.content %></p>
+    <% end %>
+
     <hr>
   </div>
 <% end %> 
