@@ -1,3 +1,5 @@
+require "babosa"
+
 class Story < ApplicationRecord
   
   belongs_to :user
@@ -9,6 +11,10 @@ class Story < ApplicationRecord
 
   def destroy
     update(deleted_at: Time.now)
+  end
+
+  def normalize_friendly_id(input)
+    input.to_s.to_slug.normalize(transliterations: :russian).to_s
   end
 
   include AASM
@@ -24,6 +30,17 @@ class Story < ApplicationRecord
     event :unpublish do
       transitions from: :published, to: :draft
     end
+  end
+
+  extend FriendlyId
+  friendly_id :slug_options, use: :slugged
+
+  private
+  def slug_options
+    [
+      :title,
+      [:title, SecureRandom.hex[0,8]]
+    ]
   end
 
 end

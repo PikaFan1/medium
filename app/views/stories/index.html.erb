@@ -6,7 +6,7 @@
     <div class="buttons">
 
       <h2 class="title">
-        <%= link_to story.title, story_path(story) %>
+        <%= link_to story.title, story_path(story), class: 'has-text-gray-darker' %>
         <%= content_tag :span, '已發佈', class: 'tag is-primary' if story.published? %>
         <%= content_tag :span, '未發佈', class: 'tag' if story.draft? %>
         <%= content_tag :span, '草稿編輯中', class: 'tag' if story.pending_story != nil %>
@@ -18,7 +18,7 @@
         <div class="navbar-dropdown">
           <div>
             <% if story.pending_story != nil %>
-              <%= link_to '編輯草稿', edit_pending_story_path(story), class: "navbar-item" %>
+              <%= link_to '繼續編輯草稿', edit_pending_story_path(story), class: "navbar-item" %>
               <%= link_to '以草稿更新文章', publish_story_path(story), method: 'post', class: "navbar-item" %>
               <%= link_to '刪除草稿', story_path(story), method: 'delete', class: "navbar-item", data:{confirm: '確認刪除？'} %>
             <% else %>
@@ -47,7 +47,7 @@
     </p>
 
     <% if story.pending_story != nil %>
-      <%= link_to story.pending_story.title, pending_story_path(story) %>（草稿）
+      <%= link_to story.pending_story.title, pending_story_path(story), class: 'has-text-gray-darker' %>（草稿）
       <p><%= story.pending_story.content %></p>
     <% end %>
 
