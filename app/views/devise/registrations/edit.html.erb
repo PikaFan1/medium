@@ -16,7 +16,7 @@
     <div class="control">
       <%= f.file_field :avatar %>
     </div>
-    <%= image_tag current_user.avatar.variant(resize: '250x250') %>
+    <%= avatar(current_user) %>
   </div>
 
   <div class="field">

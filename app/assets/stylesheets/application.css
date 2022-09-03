@@ -19,3 +19,8 @@
  #error_explanation ul li{
     color: red;
  }
+
+ .navbar-link .user-avatar {
+   border-radius: 50%;
+   margin-right: 10px;
+ }
