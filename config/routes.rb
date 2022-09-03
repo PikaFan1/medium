@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
   devise_for :users, controllers: {
-    registration: 'users/registration'
+    registrations: 'users/registrations'
   }
+
 
   resources :stories do
     member do
