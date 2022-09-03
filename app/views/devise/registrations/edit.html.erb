@@ -4,8 +4,23 @@
   <%= render "devise/shared/error_messages", resource: resource %>
 
   <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    <%= f.label :username, '使用者帳號' %><br />
+    <div class="control">
+      <%= f.text_field :username, class: "input" %>
+    </div>
+    <p class="help">範例：@pikafan</p>
+  </div>
+
+  <div class="field">
+    <%= f.label :intro, '個人簡介' %><br />
+    <div class="control">
+      <%= f.text_area :intro, class: "textarea", rows: 5 %>
+    </div>
+  </div>
+
+  <div class="field">
+    <%= f.label :email, '電子信箱' %><br />
+    <%= f.email_field :email, autocomplete: "email", class: 'input' %>
   </div>
 
   <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
@@ -13,31 +28,24 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
+    <%= f.label :password, '新密碼' %> <i>(變更密碼專用）</i><br />
+    <%= f.password_field :password, autocomplete: "new-password", class: 'input' %>
     <% if @minimum_password_length %>
       <br />
-      <em><%= @minimum_password_length %> characters minimum</em>
+      <p class="help">(<%= @minimum_password_length %> characters minimum)</p>
     <% end %>
   </div>
 
   <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+    <%= f.label :password_confirmation, '確認新密碼' %><i>(變更密碼專用）</i><br />
+    <%= f.password_field :password_confirmation, autocomplete: "new-password", class: 'input' %>
   </div>
-
-  <div class="field">
-    <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-    <%= f.password_field :current_password, autocomplete: "current-password" %>
-  </div>
+  <br />
 
   <div class="actions">
-    <%= f.submit "Update" %>
+    <%= f.submit "更新", class: "button is-primary" %>
   </div>
 <% end %>
+<hr>
+<%= button_to "刪除帳號", registration_path(resource_name), data: { confirm: "永久刪除帳號?" }, method: :delete, class: "button is-danger is-small" %></p>
 
-<h3>Cancel my account</h3>
-
-<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
-
-<%= link_to "Back", :back %>
