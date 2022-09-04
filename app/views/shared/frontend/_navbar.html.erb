@@ -38,7 +38,9 @@
             <%= link_to "我的文章", stories_path, class: "navbar-item" %>
             <hr class="navbar-divider">
 
-            <%= link_to "個人資料", edit_user_registration_path, class: "navbar-item" %>
+            <%= link_to "個人資料", edit_user_intro_path, class: "navbar-item" %>
+            <%= link_to "密碼修改", edit_user_registration_path, class: "navbar-item" %>
+
             <%= link_to "登出", destroy_user_session_path, method: 'delete', class: "navbar-item", data: {confirm: "是否確定登出？"} %>
             <hr class="navbar-divider">
 

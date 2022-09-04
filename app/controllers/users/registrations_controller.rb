@@ -3,6 +3,8 @@
 class Users::RegistrationsController < Devise::RegistrationsController
   # before_action :configure_sign_up_params, only: [:create]
   before_action :configure_account_update_params, only: [:update]
+  prepend_before_action :authenticate_scope!, only: [:edit, :update, :destroy, :edit_intro, :update_intro]
+
 
   # GET /resource/sign_up
   # def new
@@ -38,6 +40,23 @@ class Users::RegistrationsController < Devise::RegistrationsController
   #   super
   # end
 
+  def edit_intro
+    render 'edit_intro'
+  end
+
+  def update_intro
+    self.resource = resource_class.to_adapter.get!(send(:"current_#{resource_name}").to_key)
+    devise_parameter_sanitizer.permit(:account_update, keys: [:username, :intro, :avatar])
+
+    resource_updated = resource.update_without_password(account_update_params)
+
+    if resource_updated
+      redirect_to edit_user_intro_path(resource_updated), notice: '儲存成功'
+    else
+      render 'edit_intro'
+    end
+  end
+
   # protected
   private
 
@@ -51,9 +70,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
     devise_parameter_sanitizer.permit(:account_update, keys: [:username, :intro, :avatar])
   end
 
-  def update_resource(resource, params)
-    resource.update_without_password(params)
-  end
 
   # The path used after sign up.
   # def after_sign_up_path_for(resource)
