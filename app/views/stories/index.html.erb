@@ -47,7 +47,7 @@
     </p>
 
     <% if story.pending_story != nil %>
-      <%= link_to story.pending_story.title, pending_story_path(story), class: 'has-text-gray-darker' %>（草稿）
+      <%= link_to story.pending_story.title, pending_story_path(story), class: 'has-text-grey-darker' %>（草稿）
       <p><%= story.pending_story.content %></p>
     <% end %>
 

@@ -41,7 +41,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   def edit_intro
-    render 'edit_intro'
   end
 
   def update_intro
@@ -51,7 +50,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     resource_updated = resource.update_without_password(account_update_params)
 
     if resource_updated
-      redirect_to edit_user_intro_path(resource_updated), notice: '儲存成功'
+      redirect_to edit_user_intro_path(resource_updated), notice: '更新成功'
     else
       render 'edit_intro'
     end

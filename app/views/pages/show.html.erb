@@ -1,0 +1,12 @@
+<div class="content">
+  <h2 class="title">
+    <%= @story.title %>
+  </h2> 
+
+  <p><%= @story.content %></p>
+
+  <p>
+    創建時間：<%= @story.created_at.to_date %>，
+    最後更新時間：<%= time_ago_in_words(@story.updated_at) %>前
+  </p>
+</div>

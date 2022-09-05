@@ -1,0 +1,17 @@
+<h1 class= 'title'>@<%= @user.username %>的文章</h1>
+
+<% @stories.each do |story| %>
+
+  <div class="content">
+    <h2 class="title">
+      <%= link_to story.title, story_page_path(story.user.username, story), class: 'has-text-grey-darker' %>
+    </h2> 
+
+    <p><%= story.content %></p>
+
+    <p>
+      創建時間：<%= story.created_at.to_date %>，
+      最後更新時間：<%= time_ago_in_words(story.updated_at) %>前
+    </p>
+  </div>
+<% end %> 

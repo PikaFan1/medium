@@ -15,6 +15,10 @@ Rails.application.routes.draw do
       post :publish
     end
   end
+
+  get '@:username/:story_id', to: 'pages#show', as: 'story_page'
+  get '@:username', to: 'pages#user', as: 'user_page'
+  
   resources :pending_stories
 
 
