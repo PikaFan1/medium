@@ -4,10 +4,12 @@ class Story < ApplicationRecord
   
   belongs_to :user
   has_one :pending_story, dependent: :destroy
+  has_one_attached :cover_image
 
   validates :title, :content, presence: true
 
   default_scope { where(deleted_at: nil )}
+  scope :published_stories, -> {published.with_attached_cover_image.order(created_at: :desc).includes(:user)}
 
   def destroy
     update(deleted_at: Time.now)

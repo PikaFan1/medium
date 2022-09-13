@@ -82,15 +82,17 @@
     <article class="media">
       <div class="media-content">
         <h2 class="title is-4"><%= link_to story.title, story_page_path(story.user.username, story), class: 'has-text-grey-darker' %></h2>
-        <p class="content"><%= story.content %></p>
+        <p class="content"><%= strip_tags(story.content).truncate(200) %></p>
         <footer>
         @<%= link_to story.user.username, user_page_path(story.user.username), class: 'has-text-grey-darker' %> | 創建時間：<%= story.created_at.to_date %>
         </footer>
       </div>
 
-      <figure class="media-right">
-        <img src="https://fakeimg.pl/150x150/">
-      </figure>
+      <% if story.cover_image.attached? %>
+        <figure class="media-right">
+          <%= image_tag story.cover_image.variant(resize_to_limit: [150, 150]) %>
+        </figure>
+      <% end %>
     </article>
   <% end %>
 </section>

@@ -30,7 +30,7 @@
       </div>
     </div>
 
-    <p><%= @story.content %></p>
+    <p><%= simple_format(@story.content).truncate(250) %></p>
 
     <p>
       創建時間：<%= @story.created_at.to_date %>，

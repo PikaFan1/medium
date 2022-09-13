@@ -12,12 +12,13 @@
  *
  *= require_tree .
  *= require_self
+ *= require_stories.scss
  *= require bulma/bulma.css
  */
 
 
  #error_explanation ul li{
-    color: red;
+   color: red;
  }
 
  .navbar-link .user-avatar {

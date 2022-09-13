@@ -13,6 +13,14 @@
 <%= form_for(story) do |form| %>
   <div class="field">
     <div class="control">
+      <%= image_tag story.cover_image.variant(resize_to_limit: [1000, 800]), class: 'cover-image' if story.cover_image.attached? %>
+      <%= form.label :cover_image, '封面圖' %>
+      <%= form.file_field :cover_image %>
+    </div>
+  </div>
+
+  <div class="field">
+    <div class="control">
       <%= form.label :title, '標題' %>
       <%= form.text_field :title, class: 'input is-primary' %>
     </div>
