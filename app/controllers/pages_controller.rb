@@ -6,6 +6,8 @@ class PagesController < ApplicationController
 
   def show
     @story = Story.friendly.find(params[:story_id])
+    @comment = @story.comments.new
+    @comments = @story.comments.order(created_at: :desc)
   end
 
   def user

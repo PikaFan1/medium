@@ -15,6 +15,12 @@ module MyMedium
     config.time_zone= 'Asia/Taipei'
     config.active_storage.variant_processor = :mini_magick
 
+    # config.generators do |g|
+    #   g.assets false
+    #   g.helper false
+    #   g.test_framework false
+    # end
+
 
     # Configuration for the application, engines, and railties goes here.
     #

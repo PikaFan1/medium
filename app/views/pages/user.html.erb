@@ -7,7 +7,7 @@
       <%= link_to story.title, story_page_path(story.user.username, story), class: 'has-text-grey-darker' %>
     </h2> 
 
-    <p><%= story.content %></p>
+    <p><%= strip_tags(story.content).truncate(200) %></p>
 
     <p>
       創建時間：<%= story.created_at.to_date %>，

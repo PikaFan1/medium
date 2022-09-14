@@ -14,6 +14,7 @@ Rails.application.routes.draw do
       post :unpublish
       post :publish
     end
+    resources :comments, only: [:create]
   end
 
   get '@:username/:story_id', to: 'pages#show', as: 'story_page'

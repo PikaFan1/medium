@@ -32,6 +32,7 @@ gem "rails-i18n"
 gem 'aasm', '~> 5.3'
 gem 'friendly_id', '~> 5.4', '>= 5.4.2'
 gem 'babosa', '~> 1.0', '>= 1.0.2'
+gem 'paranoia', '~> 2.6'
 
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"

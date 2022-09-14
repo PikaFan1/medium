@@ -1,19 +1,21 @@
 require "babosa"
 
 class Story < ApplicationRecord
+  acts_as_paranoid
   
   belongs_to :user
   has_one :pending_story, dependent: :destroy
   has_one_attached :cover_image
+  has_many :comments
 
   validates :title, :content, presence: true
 
-  default_scope { where(deleted_at: nil )}
+  # default_scope { where(deleted_at: nil )}
   scope :published_stories, -> {published.with_attached_cover_image.order(created_at: :desc).includes(:user)}
 
-  def destroy
-    update(deleted_at: Time.now)
-  end
+  # def destroy
+  #   update(deleted_at: Time.now)
+  # end
 
   def normalize_friendly_id(input)
     input.to_s.to_slug.normalize(transliterations: :russian).to_s
