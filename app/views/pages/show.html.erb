@@ -15,7 +15,10 @@
 
 
       <footer>
-        拍手 0
+        <%= link_to '#', class: 'loveButton' do %>
+          <i class="fa-regular fa-heart"></i>
+          <span class: 'loveCount'>0</span>
+        <% end %>
       </footer>
     </article>
     <hr>
