@@ -13,6 +13,7 @@ Rails.application.routes.draw do
     member do
       post :unpublish
       post :publish
+      post :love
     end
     resources :comments, only: [:create]
   end
