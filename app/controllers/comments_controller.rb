@@ -6,8 +6,9 @@ class CommentsController < ApplicationController
         @comment = @story.comments.new(comment_params)
         @comment.user = current_user
 
-        unless @comment.save
-          render js: "alert('error')"
+        if @comment.save
+          redirect_to story_page_path(@story)
+        else
         end
     end
 

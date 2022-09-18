@@ -7,5 +7,5 @@ class User < ApplicationRecord
   has_many :stories, dependent: :destroy
   has_one_attached :avatar
 
-  validates :username, uniqueness: true
+  validates :username, presence: true, uniqueness: true
 end
