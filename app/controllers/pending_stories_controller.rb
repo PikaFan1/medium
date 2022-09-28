@@ -17,6 +17,7 @@ class PendingStoriesController < ApplicationController
 
     if @pending_story.update(pending_story_params)
       if params[:publish]
+        @story.cover_image.attach(params[cover_image]) if @story.pending_story.cover_image.attached?
         @story.update(title: @pending_story.title, content: @pending_story.content)
         @pending_story.destroy
         redirect_to stories_path, notice: '發布成功'
@@ -36,7 +37,6 @@ class PendingStoriesController < ApplicationController
   private
 
   def pending_story_params
-    params.require(:pending_story).permit(:title, :content)
+    params.require(:pending_story).permit(:title, :content, :cover_image)
   end
-
 end
