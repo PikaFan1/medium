@@ -66,7 +66,7 @@ class StoriesController < ApplicationController
 
   def publish
     if @story.pending_story != nil
-      @story.cover_image.attach(params[:cover_image]) if @story.pending_story.cover_image.attached?
+      @story.cover_image.attach(@story.pending_story.cover_image.blob) if @story.pending_story.cover_image.attached?
       @story.update(title: @story.pending_story.title, content: @story.pending_story.content)
       @story.pending_story.destroy
       redirect_to stories_path, notice: '更新成功！'    

@@ -15,7 +15,7 @@
 
 
       <footer data-controller = 'story'>
-        <%= link_to '#', class: 'loveButton', data: { action: 'story#addLove', slug: @story.slug} do %>
+        <%= link_to 'javascript:;', class: 'loveButton', data: { action: 'story#addLove', slug: @story.slug} do %>
           <i class="fa-regular fa-heart"></i>
           <span class: 'loveCount', data-target = 'story.loveCount'>0</span>
         <% end %>

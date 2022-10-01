@@ -1,12 +1,11 @@
 require "babosa"
 
 class PendingStory < ApplicationRecord
+  extend FriendlyId
 
   belongs_to :story
   has_one_attached :cover_image
-
-
-  extend FriendlyId
+  
   friendly_id :slug_options, use: :slugged
 
   private

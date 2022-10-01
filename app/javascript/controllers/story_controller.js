@@ -4,10 +4,11 @@ import { axios } from 'axios'
 export default class extends Controller {
   static targets = ['loveCount']
   addLove(event) {
+    console.log(123)
     event.preventDefault()
     let slug = event.currentTarget.dataset.slug
 
-    // console.log('go')
+    console.log('go')
     // this.loveCountTarget.innerHTML = 'kk'
     axios.post(`/stories/${slug}/love`)
          .then(function(response){
