@@ -1,7 +1,9 @@
 class StoriesController < ApplicationController
   
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:love]
   before_action :find_story, only: [:show, :edit, :update, :destroy, :publish, :unpublish]
+  skip_before_action :verify_authenticity_token, only: [:love]
+  
 
   def index
     @stories = current_user.stories.order(updated_at: :desc)
@@ -80,6 +82,18 @@ class StoriesController < ApplicationController
     @story.pending_story.destroy if @story.pending_story != nil
     @story.unpublish!
     redirect_to stories_path, notice: '下架成功，移至草稿區！'    
+  end
+
+  def love
+    console.log('123')
+
+    if user_signed_in?
+      @story = Story.friendly.find(params[:id])
+      @story.increment(:love)
+      render json: {status: @story.love}
+    else
+      render json: {status: 'sign_in_first'}
+    end
   end
 
   private
