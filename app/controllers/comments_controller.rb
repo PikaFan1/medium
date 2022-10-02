@@ -6,10 +6,8 @@ class CommentsController < ApplicationController
         @comment = @story.comments.new(comment_params)
         @comment.user = current_user
 
-        if @comment.save
-          redirect_to story_page_path(@story)
-        else
-        end
+        @comment.save
+        redirect_to story_page_path(@story)
     end
 
     private
