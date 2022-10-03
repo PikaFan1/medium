@@ -2,10 +2,12 @@
   <section class="column is-offset-3 is-6">
     <h1 class="title"><%= @story.title %></h1>
 
-    <span class="profile">
+    <span class="profile" data-controller = 'user'>
       <%= image_tag @story.user.avatar.variant(resize_to_limit: [50,50]), class: 'avatar' if @story.user.avatar.attached? %>
       <span class="username"><%= @story.user.username %></span>
-      <a href="#" class="follow-button">Follow</a>
+      <%= link_to 'javascript:;', class: 'follow-button', data: { action: 'user#follow', target: 'user.followButton', user: @story.user.id } do %>
+        <%= (user_signed_in? && current_user.follow?(@story.user)) ? 'Followed' : 'Follow' %>
+      <% end%>
     </span>
 
     <article class="content">

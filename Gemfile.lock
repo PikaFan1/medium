@@ -105,6 +105,10 @@ GEM
       activerecord (>= 4.0.0)
     globalid (1.0.0)
       activesupport (>= 5.0)
+    hirb (0.7.3)
+    hirb-unicode (0.0.5)
+      hirb (~> 0.5)
+      unicode-display_width (~> 0.1.1)
     i18n (1.12.0)
       concurrent-ruby (~> 1.0)
     image_processing (1.12.2)
@@ -233,6 +237,7 @@ GEM
       railties (>= 6.0.0)
     tzinfo (2.0.5)
       concurrent-ruby (~> 1.0)
+    unicode-display_width (0.1.1)
     vite_rails (3.0.12)
       railties (>= 5.1, < 8)
       vite_ruby (~> 3.0, >= 3.2.2)
@@ -270,6 +275,7 @@ DEPENDENCIES
   debug
   devise (~> 4.8, >= 4.8.1)
   friendly_id (~> 5.4, >= 5.4.2)
+  hirb-unicode (~> 0.0.5)
   image_processing (~> 1.12, >= 1.12.2)
   importmap-rails
   jbuilder

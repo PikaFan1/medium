@@ -6,7 +6,12 @@ Rails.application.routes.draw do
   devise_scope :user do
     get 'users/intro/edit', to: 'users/registrations#edit_intro', as: 'edit_user_intro'
     post 'users/intro/edit', to: 'users/registrations#update_intro', as: 'update_user_intro'
+  end
 
+  resources :user, only: [] do
+    member do
+      post :follow
+    end
   end
 
   resources :stories do
